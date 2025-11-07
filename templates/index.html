@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List Application</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List Application</h1>
+
+    <h2>Current To Do Items</h2>
+    {% if todos %}
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Email</th>
+            <th>Priority</th>
+        </tr>
+        {% for todo in todos %}
+        <tr>
+            <td>{{ todo.task }}</td>
+            <td>{{ todo.email }}</td>
+            <td>{{ todo.priority }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No To Do items yet.</p>
+    {% endif %}
+
+    <h2>Add New To Do Item</h2>
+    <form action="/submit" method="post">
+        <label>Task:</label>
+        <input type="text" name="task">
+        <br><br>
+        <label>Email:</label>
+        <input type="text" name="email">
+        <br><br>
+        <label>Priority:</label>
+        <select name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Add To Do Item">
+    </form>
+
+    <br>
+
+    <h2>Clear All Items</h2>
+    <form action="/clear" method="post">
+        <input type="submit" value="Clear">
+    </form>
+</body>
+</html>
